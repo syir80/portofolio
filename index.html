@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-light: #ffffff; 
+      --bg-light: #ffffff;    
       --bg-dark: #121212;
       --text-light: #000000;
       --text-dark: #ffffff;
@@ -125,7 +125,7 @@
 
   <section class="contact" id="contact">
     <h2>Kontak Saya</h2>
-    <form onsubmit="handleSubmit(event)">
+    <form id="whatsappForm">
       <label for="name">Nama</label>
       <input type="text" id="name" placeholder="Nama" required />
 
@@ -135,8 +135,9 @@
       <label for="message">Pesan</label>
       <textarea id="message" placeholder="Pesan" rows="5" required></textarea>
 
-      <button type="submit">Kirim</button>
+      <button type="submit">💬 Kirim ke WhatsApp</button>
     </form>
+
     <p>WhatsApp: 0881026523305</p>
     <p>Email: syirubinnadzri@gmail.com</p>
     <p>
@@ -151,10 +152,27 @@
       document.body.classList.toggle('dark-mode');
     }
 
-    function handleSubmit(event) {
+    // Script untuk mengirim pesan ke WhatsApp
+    document.getElementById("whatsappForm").addEventListener("submit", function(event) {
       event.preventDefault();
-      alert("Terima kasih! Pesan Anda telah terkirim.");
-    }
+
+      const name = encodeURIComponent(document.getElementById("name").value.trim());
+      const email = encodeURIComponent(document.getElementById("email").value.trim());
+      const message = encodeURIComponent(document.getElementById("message").value.trim());
+
+      const whatsappNumber = "62881026523305"; // Pastikan pakai +62
+
+      const text = `
+Halo Adkhilni, ada pesan baru dari portofolio website:
+
+>Nama: ${name}
+>Email: ${email}
+>Pesan:
+${message}
+      `.trim();
+
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
+    });
   </script>
 </body>
 </html>
